@@ -23,6 +23,6 @@ jobs:
         env:
           PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
       - name: Deploy function
-        run: gcloud components install beta && gcloud beta functions deploy botHook --region=europe-west1 --quiet --set-env-vars BOT_TOKEN=$BOT_TOKEN .env.yml --runtime nodejs12 --trigger-http
+        run: gcloud components install beta && gcloud beta functions deploy botHook --region=europe-west1 --quiet --set-env-vars BOT_TOKEN=$BOT_TOKEN --runtime nodejs12 --trigger-http
         env:
           PROJECT_NAME: ${{ secrets.BOT_TOKEN }}
