@@ -18,4 +18,5 @@ jobs:
           env_vars: BOT_TOKEN=${{ secrets.BOT_TOKEN }}
           project_id: ${{ secrets.PROJECT_ID }}
           credentials: ${{ secrets.CI_KEY }}
+          region: ${{ secrets.REGION }}
 
