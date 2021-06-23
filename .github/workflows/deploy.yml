@@ -11,18 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: google-github-actions/setup-gcloud@master
+      - uses: google-github-actions/deploy-cloud-functions@main
         with:
-          version: '290.0.1'
+          runtime: nodejs12
+          name: ${{ secrets.FUNCTION_NAME }}
+          env_vars: BOT_TOKEN=${{ secrets.BOT_TOKEN }}
           project_id: ${{ secrets.PROJECT_ID }}
-          service_account_key: ${{ secrets.CI_KEY }}
-          export_default_credentials: true
-      - run: gcloud info
-      - name: Set project config
-        run: gcloud config set project $PROJECT_NAME
-        env:
-          PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
-      - name: Deploy function
-        run: gcloud beta functions deploy botHook --region=europe-west1 --quiet --set-env-vars BOT_TOKEN=$BOT_TOKEN --runtime nodejs12 --trigger-http
-        env:
-          PROJECT_NAME: ${{ secrets.BOT_TOKEN }}
+          credentials: ${{ secrets.CI_KEY }}
+
