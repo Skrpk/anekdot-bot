@@ -1,0 +1,27 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: google-github-actions/setup-gcloud@master
+        with:
+          version: '290.0.1'
+          project_id: ${{ secrets.PROJECT_ID }}
+          service_account_key: ${{ secrets.CI_KEY }}
+          export_default_credentials: true
+      - run: gcloud info
+      - name: Set project config
+        run: gcloud config set project $PROJECT_NAME
+        env:
+          PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
+      - name: Deploy function
+        run: gcloud beta functions deploy botHook --region=europe-west1 --env-vars-file .env.yml --runtime nodejs12 --trigger-http
+
