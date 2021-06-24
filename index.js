@@ -16,7 +16,7 @@ if (NODE_ENV === 'production') {
 		`https://${REGION}-${PROJECT_ID}.cloudfunctions.net/${process.env.FUNCTION_TARGET}`,
 	);
 	exports.botHook = (req, res) => {
-		return bot;
+		bot.handleUpdate(req.body, res);
 	};
 } else {
 	bot.launch();
