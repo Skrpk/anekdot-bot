@@ -5,7 +5,7 @@ const { getDailyAnek } = require("api/services/get-daily-anek")
 
 module.exports = async ctx => {
   try {
-    logger.error({
+    logger.info({
       scope: "commands.get-daily-anek",
       message: "fetching daily anek"
     })
