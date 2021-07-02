@@ -5,10 +5,13 @@ const { getDailyAnek } = require("api/services/get-daily-anek")
 
 module.exports = async ctx => {
   try {
+    logger.error({
+      scope: "commands.get-daily-anek",
+      message: "fetching daily anek"
+    })
     const reply = await getDailyAnek()
     ctx.reply(reply)
   } catch (err) {
-    console.log("TTTTTTTTTTTTTTTTTTTTTTTTTTT")
     logger.error({
       scope: "commands.get-daily-anek",
       errors: [err]
