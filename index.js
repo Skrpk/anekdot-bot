@@ -21,7 +21,7 @@ const generateWebhookUrl = () =>
 
 if (NODE_ENV === "production") {
 	logger.info({
-    message: 'Setting webhook'
+    message: `Setting webhook: ${generateWebhookUrl()}`
   })
   bot.telegram.setWebhook(generateWebhookUrl())
   exports.botHook = (req, res) => {
