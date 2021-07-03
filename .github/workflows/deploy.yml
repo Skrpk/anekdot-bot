@@ -15,7 +15,7 @@ jobs:
         with:
           runtime: nodejs12
           name: ${{ secrets.FUNCTION_NAME }}
-          env_vars: BOT_TOKEN=${{ secrets.BOT_TOKEN }},VK_API_TOKEN=${{ secrets.VK_API_TOKEN }}
+          env_vars: BOT_TOKEN=${{ secrets.BOT_TOKEN }},VK_API_TOKEN=${{ secrets.VK_API_TOKEN }},PROJECT_ID=${{ secrets.PROJECT_ID }},REGION=${{ secrets.REGION }}
           project_id: ${{ secrets.PROJECT_ID }}
           credentials: ${{ secrets.CI_KEY }}
           region: ${{ secrets.REGION }}
