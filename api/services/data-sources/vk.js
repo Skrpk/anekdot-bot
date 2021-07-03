@@ -5,6 +5,7 @@ class VKSource {
   constructor({ token, apiLimit, groupId }) {
     this.vk = new VK({ token: token, apiLimit: apiLimit })
     this.groupId = groupId
+    this.linkRegExp = "([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?"
   }
 
   getDailyAnek = async () => {
@@ -14,8 +15,22 @@ class VKSource {
       filter: 'owner'
     })
 
-    return resp.items[Math.floor(Math.random() * 100)].text
+    return this.getAnekFromResp(resp.items)
   }
+
+  getAnekFromResp = (items) => {
+    let index = Math.floor(Math.random() * 100)
+    let anek = items[index].text
+
+    while(this.checkIfAnekIsCommercial(anek)) {
+			index = Math.floor(Math.random() * 100)
+			anek = items[index].text
+    }
+
+    return anek
+  }
+
+	checkIfAnekIsCommercial = (anek) => new RegExp(this.linkRegExp).test(anek)
 }
 
 module.exports = VKSource
