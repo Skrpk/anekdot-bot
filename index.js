@@ -25,7 +25,7 @@ if (NODE_ENV === "production") {
   })
   bot.telegram.setWebhook(webhookUrl)
   exports.botHook = (req, res) => {
-    logger.info({ message: "request: ", body: req.body })
+    logger.info({ message: "request: ", body: req.body, scope: "request.incoming-request", })
     bot.handleUpdate(req.body, res)
   }
 } else {
