@@ -11,8 +11,7 @@ const { BOT_TOKEN, REGION, PROJECT_ID, FUNCTION_TARGET, NODE_ENV } = config.get(
 
 const bot = new Telegraf(BOT_TOKEN)
 
-//bot.hears("hi", (ctx) => ctx.reply("Hey there"))
-// bot.on("message", (ctx) => ctx.reply("Not supported command")) // you need this to handle not supported command. Unless you do this you will get timeouts of function (extra usage)
+bot.on("message", ctx => ctx.reply("Not supported command")) // you need this to handle not supported command. Unless you do this you will get timeouts of function (extra usage)
 
 registerTgRoutes(bot)
 
@@ -21,7 +20,6 @@ const generateWebhookUrl = () =>
 
 if (NODE_ENV === "production") {
   const webhookUrl = generateWebhookUrl()
-  console.log(">>>>>>>>>>>>", process.env)
   logger.info({
     message: `Setting webhook: ${webhookUrl}`
   })
