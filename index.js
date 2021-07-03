@@ -20,10 +20,12 @@ const generateWebhookUrl = () =>
   `https://${REGION}-${PROJECT_ID}.cloudfunctions.net/${FUNCTION_TARGET}`
 
 if (NODE_ENV === "production") {
-	logger.info({
-    message: `Setting webhook: ${generateWebhookUrl()}`
+  const webhookUrl = generateWebhookUrl()
+  console.log(">>>>>>>>>>>>", process.env)
+  logger.info({
+    message: `Setting webhook: ${webhookUrl}`
   })
-  bot.telegram.setWebhook(generateWebhookUrl())
+  bot.telegram.setWebhook(webhookUrl)
   exports.botHook = (req, res) => {
     logger.info({ message: "request: ", body: req.body })
     bot.handleUpdate(req.body, res)
